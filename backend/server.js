@@ -42,7 +42,13 @@ if (!isProd) {
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 app.use(cookieParser());
-
+// Increase timeout for slow free tier
+app.use((req, res, next) => {
+  res.setTimeout(120000, () => {
+    res.status(408).json({ success: false, message: 'Request timeout. Please try again.' });
+  });
+  next();
+});
 // ─── Rate Limiting ────────────────────────────────────────────────────────────
 app.use(rateLimit({
   windowMs: 15 * 60 * 1000,
