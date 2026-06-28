@@ -1,0 +1,19 @@
+const { body, param } = require('express-validator');
+
+const registerValidator = [
+  body('name').trim().notEmpty().withMessage('Name is required').isLength({ min: 2, max: 50 }),
+  body('email').isEmail().withMessage('Valid email required').normalizeEmail(),
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+];
+
+const loginValidator = [
+  body('email').isEmail().withMessage('Valid email required').normalizeEmail(),
+  body('password').notEmpty().withMessage('Password is required'),
+];
+
+const resetPasswordValidator = [
+  body('password').isLength({ min: 6 }).withMessage('Password must be at least 6 characters'),
+  param('token').notEmpty(),
+];
+
+module.exports = { registerValidator, loginValidator, resetPasswordValidator };
