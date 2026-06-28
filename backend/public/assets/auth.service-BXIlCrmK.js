@@ -1,0 +1,1 @@
+import{y as t}from"./index-gYKHrYnU.js";const a={register:o=>t.post("/auth/register",o),login:o=>t.post("/auth/login",o),googleLogin:o=>t.post("/auth/google",{credential:o}),logout:()=>t.post("/auth/logout"),forgotPassword:o=>t.post("/auth/forgot-password",{email:o}),resetPassword:(o,s)=>t.post(`/auth/reset-password/${o}`,{password:s}),getMe:()=>t.get("/auth/me")};export{a};
